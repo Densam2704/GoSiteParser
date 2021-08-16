@@ -1,0 +1,5 @@
+LET page = DOCUMENT("https://github.com/trending")
+FOR row IN ELEMENTS(page, "ol.repo-list li")
+    LET name = INNER_TEXT(row, "div:nth-child(1)")
+    LET description = INNER_TEXT(row, "div:nth-child(3)")
+    RETURN { name, description }
