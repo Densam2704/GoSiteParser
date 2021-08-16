@@ -12,25 +12,25 @@ import (
 	"github.com/MontFerret/ferret/pkg/drivers/http"
 )
 
-type Topic struct {
+type Smartphone struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
 }
 
 func main() {
-	topics, err := getTopTenSmartphones()
+	smartphones, err := getTopTenSmartphones()
 
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	for _, topic := range topics {
-		fmt.Println(fmt.Sprintf("%s \tURL: %s", topic.Name, topic.URL))
+	for _, smartphone := range smartphones {
+		fmt.Println(fmt.Sprintf("%s \tURL: %s", smartphone.Name, smartphone.URL))
 	}
 }
 
-func getTopTenSmartphones() ([]*Topic, error) {
+func getTopTenSmartphones() ([]*Smartphone, error) {
 	query := `
 		LET doc = DOCUMENT("https://www.citilink.ru/catalog/smartfony")
 
@@ -69,7 +69,7 @@ func getTopTenSmartphones() ([]*Topic, error) {
 		return nil, err
 	}
 
-	res := make([]*Topic, 0, 10)
+	res := make([]*Smartphone, 0, 10)
 
 	err = json.Unmarshal(out, &res)
 
